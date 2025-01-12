@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,5 +53,4 @@ class BachecaTest {
 		b.aggiungiAnnuncio(a2);
 		assertEquals("[Annuncio [codice=0, utente=[email=daniele@gmail, nome=Daniele], tipologia=Acquisto, articolo=Libro, prezzo=30.5, parolaChiave=Nero, scadenza=null], Annuncio [codice=1, utente=[email=daniele@gmail, nome=Daniele], tipologia=Vendita, articolo=Telefono, prezzo=100.0, parolaChiave=Nuovo, Nero, scadenza=2025-02-05]]", b.listaAnnunciParolaChiave("Nero, Nuovo").toString());
 	}
-
 }
