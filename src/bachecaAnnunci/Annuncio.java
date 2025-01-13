@@ -2,6 +2,7 @@ package bachecaAnnunci;
 
 import java.time.LocalDate;
 
+import bachecaAnnunci.Annuncio;
 import exceptions.AnnuncioException;
 import utilities.Costanti;
 
@@ -75,6 +76,12 @@ public class Annuncio{
 
 	public String getParolaChiave(Annuncio a) {
 		return a.parolaChiave;
+	}
+	
+	
+	public LocalDate getDate(Annuncio a){
+		if(a.tipologia) return a.scadenza;
+		else return null;
 	}
 
 	@Override

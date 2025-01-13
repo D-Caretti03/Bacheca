@@ -1,5 +1,6 @@
 package bachecaAnnunci;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -68,6 +69,30 @@ public class Bacheca implements Iterable<Annuncio>{
 		for(Annuncio a: bacheca)
 			System.out.println(a.toString()+ "\n");
 		return "";
+	}
+	
+//	public void MessaggioAnnunciScaduti() throws BachecaException{
+//		LocalDate oggi = LocalDate.now(); 
+//		for(Annuncio a: bacheca) {
+//			if(a.getDate(a) != null) {
+//				if(a.getDate(a).isAfter(oggi)) {
+//					Utente u = a.getUtente(a);
+//					int cod = a.getCodice(a);
+//					u.messaggi.add("Eliminare l' annuncio scaduto con codice: " + cod);
+//				}
+//			}
+//		}
+//	}
+	
+	public void EliminaAnnnunciScaduti() throws BachecaException{
+		LocalDate oggi = LocalDate.now(); 
+		for(Annuncio a: bacheca) {
+			if(a.getDate(a) != null) {
+				if(a.getDate(a).isAfter(oggi)) {
+					bacheca.remove(a);
+				}
+			}
+		}
 	}
 
 }
