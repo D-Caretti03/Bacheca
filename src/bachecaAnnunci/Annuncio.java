@@ -9,7 +9,7 @@ import utilities.Costanti;
 public class Annuncio{
 	private int codice = 0;
 	private Utente utente;
-	private boolean tipologia;
+	private char tipologia;
 	private String articolo;
 	private double prezzo;	
 	private String parolaChiave = "";
@@ -26,7 +26,7 @@ public class Annuncio{
 	 * @param scadenza		data di scadenza in caso di vendita
 	 * @param codice		codice identificativo dell'annuncio 
 	 */
-	public Annuncio(Utente utente, boolean tipologia, String articolo, double prezzo, String parolaChiave,
+	public Annuncio(Utente utente, char tipologia, String articolo, double prezzo, String parolaChiave,
 			LocalDate scadenza, int codice) throws AnnuncioException{
 		super();
 		this.utente = utente;
@@ -53,7 +53,7 @@ public class Annuncio{
 	 * @param parolaChiave
 	 * @throws AnnuncioException
 	 */
-	public Annuncio(Utente utente, boolean tipologia, String articolo, double prezzo, String parolaChiave, int codice) throws AnnuncioException{
+	public Annuncio(Utente utente, char tipologia, String articolo, double prezzo, String parolaChiave, int codice) throws AnnuncioException{
 		super();
 		this.utente = utente;
 		this.tipologia = tipologia;
@@ -70,29 +70,32 @@ public class Annuncio{
 		return a.codice;
 	}
 
-	public boolean getTipologia(Annuncio a) {
+	public char getTipologia(Annuncio a) {
 		return a.tipologia;
 	}
 
 	public String getParolaChiave(Annuncio a) {
 		return a.parolaChiave;
 	}
-	
-	
+
 	public LocalDate getDate(Annuncio a){
-		if(a.tipologia) return a.scadenza;
+		if(a.tipologia == 'v') return a.scadenza;
 		else return null;
 	}
 
 	@Override
 	public String toString() {
-		String tipo = tipologia ? "Acquisto":"Vendita";
+		String tipo = tipologia == 'a' ? "Acquisto":"Vendita";
 		return "Annuncio [codice=" + codice + ", utente=" + utente.toString() + ", tipologia=" + tipo + ", articolo="
 				+ articolo + ", prezzo=" + prezzo + ", parolaChiave=" + parolaChiave + ", scadenza=" + scadenza + "]";
 	}
 
 	public Utente getUtente(Annuncio a) {
 		return a.utente;
+	}
+	
+	public void remove() throws AnnuncioException {
+		throw new AnnuncioException(Costanti.ECC_REM_NON_SUPP);
 	}
 	
 }

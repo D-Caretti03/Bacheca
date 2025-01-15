@@ -1,0 +1,2 @@
+Annuncio [codice=1, utente=[email=daniele@gmail, nome=daniele], tipologia=Acquisto, articolo=Libro, prezzo=30.5, parolaChiave=Nero, scadenza=null]
+Annuncio [codice=2, utente=[email=daniele@gmail, nome=daniele], tipologia=Vendita, articolo=Telefono, prezzo=100.0, parolaChiave=Nuovo, Nero, scadenza=2025-02-05]

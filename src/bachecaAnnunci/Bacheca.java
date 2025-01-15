@@ -55,10 +55,11 @@ public class Bacheca implements Iterable<Annuncio>{
 		Annuncio elim = null;
 		for(Annuncio a: bacheca) {
 			Utente u = a.getUtente(a);
-			if(u.getEmail(u).equals(email) && codice == a.getCodice(a))
-				elim = getAnnuncio(codice);
+				
 			if(!(u.getEmail(u).equals(email)) && codice == a.getCodice(a))
 				throw new BachecaException(Costanti.ECC_NON_PROPRIETARIO);
+			else
+				elim = getAnnuncio(codice);
 		}
 		return bacheca.remove(elim);
 	}
@@ -71,28 +72,17 @@ public class Bacheca implements Iterable<Annuncio>{
 		return "";
 	}
 	
-//	public void MessaggioAnnunciScaduti() throws BachecaException{
-//		LocalDate oggi = LocalDate.now(); 
-//		for(Annuncio a: bacheca) {
-//			if(a.getDate(a) != null) {
-//				if(a.getDate(a).isAfter(oggi)) {
-//					Utente u = a.getUtente(a);
-//					int cod = a.getCodice(a);
-//					u.messaggi.add("Eliminare l' annuncio scaduto con codice: " + cod);
-//				}
-//			}
-//		}
-//	}
-	
-	public void EliminaAnnnunciScaduti() throws BachecaException{
+	public boolean pulisciBacheca() throws BachecaException{
 		LocalDate oggi = LocalDate.now(); 
+		ArrayList<Annuncio> elim = new ArrayList<Annuncio>();
 		for(Annuncio a: bacheca) {
 			if(a.getDate(a) != null) {
-				if(a.getDate(a).isAfter(oggi)) {
-					bacheca.remove(a);
+				if(a.getDate(a).isBefore(oggi)) {
+					elim.add(a);
 				}
 			}
 		}
+		return bacheca.removeAll(elim);
 	}
 
 }

@@ -9,4 +9,5 @@ public class Costanti {
 	public static final String ECC_DATA_PASSATA = "La data di scadenza non può essere già trascorsa";
 	public static final String ECC_COD_NEG = "Il codice non può essere negativo";
 	public static final String ECC_NON_PROPRIETARIO = "Non sei il proprietario dell'annuncio";
+	public static final String ECC_REM_NON_SUPP = "L'operazione di rimozione non è disponibile";
 }
