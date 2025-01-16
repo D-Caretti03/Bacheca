@@ -82,6 +82,14 @@ public class Annuncio{
 		if(a.tipologia == 'v') return a.scadenza;
 		else return null;
 	}
+	public String getArticolo(Annuncio a){	
+		return a.articolo;
+	}
+	
+	public double getPrezzo(Annuncio a){	
+		return a.prezzo;
+	}
+	
 
 	@Override
 	public String toString() {

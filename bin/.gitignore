@@ -1,9 +1,4 @@
+/main/
+/gui/
+/guiVista/
 /bachecaAnnunci/
-<<<<<<< HEAD
-=======
-/exceptions/
-/test/
-/utilities/
-/io/
-/fileTesto/
->>>>>>> 331c3b0 (Aggiunta lettura e scrittura da file)
