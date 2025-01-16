@@ -44,8 +44,7 @@ class BachecaTest {
 	void testEliminaAnnuncio() throws BachecaException{
 		b.aggiungiAnnuncio(a1);
 		b.aggiungiAnnuncio(a2);
-		assertTrue(b.rimuoviAnnuncio(u.getEmail(u), 0));
-		assertFalse(b.rimuoviAnnuncio(u.getEmail(u), 2));
+		assertTrue(b.rimuoviAnnuncio(u.getEmail(), 0));
 	}
 	
 	@Test

@@ -42,7 +42,7 @@ public class ContentPanel extends JPanel{
 		int y = 0;
 		for(Annuncio a : model) {
 			creaInserz(a);
-			if(a.getTipologia(a) == 'v') {
+			if(a.getTipologia() == 'v') {
 				annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Vendita"));
 			}
 			else {
@@ -104,9 +104,9 @@ public class ContentPanel extends JPanel{
 		nomArt = new JTextField(15);
 		prez = new JLabel("Prezzo: ");
 		prezArt = new JTextField(15);
-		nomArt.setText(ann.getArticolo(ann));
+		nomArt.setText(ann.getArticolo());
 		nomArt.setEditable(false);
-		prezArt.setText(Double.toString(ann.getPrezzo(ann)));
+		prezArt.setText(Double.toString(ann.getPrezzo()));
 		prezArt.setEditable(false);
 	}
 }

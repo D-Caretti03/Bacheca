@@ -3,6 +3,7 @@ package main;
 import bachecaAnnunci.Annuncio;
 import bachecaAnnunci.Bacheca;
 import bachecaAnnunci.Utente;
+import commandLine.InterfacciaRigaComando;
 import exceptions.AnnuncioException;
 import exceptions.BachecaException;
 import exceptions.UtenteException;
@@ -24,14 +25,14 @@ public class main {
 		bacheca.aggiungiAnnuncio(annuncio2); 
 		bacheca.aggiungiAnnuncio(annuncio3);
 		
-		interfacciaGrafica();
-		interfaccaRigaComando();
+		//interfacciaGrafica();
+		interfacciaRigaComando();
 	}
 	
-	private static void interfaccaRigaComando() {
-		
+	private static void interfacciaRigaComando() throws AnnuncioException, UtenteException, BachecaException {
+		new InterfacciaRigaComando().start();
 	}
-	private static void interfacciaGrafica() {
+	/*private static void interfacciaGrafica() {
 		new BachecaGui(bacheca);
-	}
+	}*/
 }

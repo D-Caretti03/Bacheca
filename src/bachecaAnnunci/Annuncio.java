@@ -30,12 +30,15 @@ public class Annuncio{
 			LocalDate scadenza, int codice) throws AnnuncioException{
 		super();
 		this.utente = utente;
-		this.tipologia = tipologia;
+		if(tipologia != 'a' && tipologia != 'v') throw new AnnuncioException(Costanti.ECC_TIPO_ERR);
 		if(articolo == null) throw new AnnuncioException(Costanti.ECC_ART_NULL);
+		if(articolo.isBlank()) throw new AnnuncioException(Costanti.ECC_ART_VUOTO);
 		if(prezzo < 0) throw new AnnuncioException(Costanti.ECC_PREZZO_NEG);
 		if(parolaChiave == null) throw new AnnuncioException(Costanti.ECC_PAROLA_CHIAVE_NULL);
 		LocalDate oggi = LocalDate.now();
+		if(scadenza == null)throw new AnnuncioException(Costanti.ECC_DATA_NULL);
 		if(scadenza.isBefore(oggi)) throw new AnnuncioException(Costanti.ECC_DATA_PASSATA);
+		this.tipologia = tipologia;
 		this.articolo = articolo;
 		this.prezzo = prezzo;
 		this.parolaChiave = parolaChiave;
@@ -56,38 +59,40 @@ public class Annuncio{
 	public Annuncio(Utente utente, char tipologia, String articolo, double prezzo, String parolaChiave, int codice) throws AnnuncioException{
 		super();
 		this.utente = utente;
-		this.tipologia = tipologia;
+		if(tipologia != 'a' && tipologia != 'v') throw new AnnuncioException(Costanti.ECC_TIPO_ERR);
 		if(articolo == null) throw new AnnuncioException(Costanti.ECC_ART_NULL);
+		if(articolo.isBlank()) throw new AnnuncioException(Costanti.ECC_ART_VUOTO);
 		if(prezzo < 0) throw new AnnuncioException(Costanti.ECC_PREZZO_NEG);
 		if(parolaChiave == null) throw new AnnuncioException(Costanti.ECC_PAROLA_CHIAVE_NULL);
+		this.tipologia = tipologia;
 		this.articolo = articolo;
 		this.prezzo = prezzo;
 		this.parolaChiave = parolaChiave;
 		this.codice = codice;
 	}
 
-	public int getCodice(Annuncio a) {
-		return a.codice;
+	public int getCodice() {
+		return this.codice;
 	}
 
-	public char getTipologia(Annuncio a) {
-		return a.tipologia;
+	public char getTipologia() {
+		return this.tipologia;
 	}
 
-	public String getParolaChiave(Annuncio a) {
-		return a.parolaChiave;
+	public String getParolaChiave() {
+		return this.parolaChiave;
 	}
 
-	public LocalDate getDate(Annuncio a){
-		if(a.tipologia == 'v') return a.scadenza;
+	public LocalDate getDate(){
+		if(this.tipologia == 'v') return this.scadenza;
 		else return null;
 	}
-	public String getArticolo(Annuncio a){	
-		return a.articolo;
+	public String getArticolo(){	
+		return this.articolo;
 	}
 	
-	public double getPrezzo(Annuncio a){	
-		return a.prezzo;
+	public double getPrezzo(){	
+		return this.prezzo;
 	}
 	
 
@@ -98,8 +103,8 @@ public class Annuncio{
 				+ articolo + ", prezzo=" + prezzo + ", parolaChiave=" + parolaChiave + ", scadenza=" + scadenza + "]";
 	}
 
-	public Utente getUtente(Annuncio a) {
-		return a.utente;
+	public Utente getUtente() {
+		return this.utente;
 	}
 	
 	public void remove() throws AnnuncioException {

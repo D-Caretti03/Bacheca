@@ -2,8 +2,9 @@ package bachecaAnnunci;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
-
 import exceptions.BachecaException;
 import utilities.Costanti;
 
@@ -24,14 +25,13 @@ public class Bacheca implements Iterable<Annuncio>{
 		if(parolaChiave == null) throw new BachecaException(Costanti.ECC_PAROLA_CHIAVE_NULL);
 		ArrayList<Annuncio> annunci = new ArrayList<Annuncio>();
 		String[] pChiave = parolaChiave.split(", ");
-		boolean inserita;
 		for(Annuncio a: bacheca) {
-			inserita = false;
+			String pChiaveAnn = a.getParolaChiave().toLowerCase();
+			HashSet<String> paroleChiaveAnn = new HashSet<>(Arrays.asList(pChiaveAnn.split(", ")));
 			for(String parola: pChiave) {
-				if(a.getParolaChiave(a).contains(parola) && !inserita) {
+				parola = parola.trim().toLowerCase();
+				if(paroleChiaveAnn.contains(parola) && !annunci.contains(a))
 					annunci.add(a);
-					inserita = true;
-				}
 			}
 		}
 		return annunci;
@@ -46,22 +46,31 @@ public class Bacheca implements Iterable<Annuncio>{
 		if(i < 0) throw new BachecaException(Costanti.ECC_COD_NEG);
 		Annuncio trovato = null;
 		for(Annuncio a: bacheca) {
-			if(a.getCodice(a)==i) trovato = a;
+			if(a.getCodice()==i) trovato = a;
 		}
 		return trovato;
 	}
 
 	public boolean rimuoviAnnuncio(String email, int codice) throws BachecaException {
 		Annuncio elim = null;
+		if(!controlloCodiceBacheca(codice))
+			throw new BachecaException(Costanti.ECC_CODICE_ERR);
 		for(Annuncio a: bacheca) {
-			Utente u = a.getUtente(a);
-				
-			if(!(u.getEmail(u).equals(email)) && codice == a.getCodice(a))
+			Utente u = a.getUtente();
+			if(!(u.getEmail().equals(email)) && codice == a.getCodice())
 				throw new BachecaException(Costanti.ECC_NON_PROPRIETARIO);
 			else
 				elim = getAnnuncio(codice);
 		}
 		return bacheca.remove(elim);
+	}
+	
+	public boolean controlloCodiceBacheca(int codice) {
+		for(Annuncio a: bacheca) {
+			if(a.getCodice() == codice)
+				return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -76,8 +85,8 @@ public class Bacheca implements Iterable<Annuncio>{
 		LocalDate oggi = LocalDate.now(); 
 		ArrayList<Annuncio> elim = new ArrayList<Annuncio>();
 		for(Annuncio a: bacheca) {
-			if(a.getDate(a) != null) {
-				if(a.getDate(a).isBefore(oggi)) {
+			if(a.getDate() != null) {
+				if(a.getDate().isBefore(oggi)) {
 					elim.add(a);
 				}
 			}
