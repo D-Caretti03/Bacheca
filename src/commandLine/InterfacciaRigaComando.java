@@ -23,6 +23,14 @@ public class InterfacciaRigaComando {
 	private Annuncio a;
 	private Bacheca b = new Bacheca();
 	
+	
+	
+	public InterfacciaRigaComando(Bacheca b, int cod) {
+		super();
+		this.b = b;
+		this.codice=cod;
+	}
+
 	public void start() throws AnnuncioException, UtenteException, BachecaException {
 		boolean exit = false;
 		while(!exit) {

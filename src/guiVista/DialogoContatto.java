@@ -65,7 +65,7 @@ public class DialogoContatto {
 		}
 		if (result == JOptionPane.OK_OPTION) { 
 			main.bacheca.aggiungiAnnuncio(a);
-			return main.bacheca.getBacheca();
+			return main.bacheca.listaAnnunciParolaChiave(cat.getText());
 		} else {
 			return main.bacheca.getBacheca();
 		}
