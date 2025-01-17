@@ -23,6 +23,7 @@ public class Bacheca implements Iterable<Annuncio>{
 
 	public ArrayList<Annuncio> listaAnnunciParolaChiave(String parolaChiave) throws BachecaException{
 		if(parolaChiave == null) throw new BachecaException(Costanti.ECC_PAROLA_CHIAVE_NULL);
+		if(parolaChiave.isBlank()) return this.bacheca;
 		ArrayList<Annuncio> annunci = new ArrayList<Annuncio>();
 		String[] pChiave = parolaChiave.split(", ");
 		for(Annuncio a: bacheca) {

@@ -20,8 +20,8 @@ import bachecaAnnunci.Annuncio;
 import bachecaAnnunci.Bacheca;
 import bachecaAnnunci.Utente;
 import exceptions.BachecaException;
+import gui.BachecaGui;
 import gui.contollo.ControlloBacheca;
-import guiVista.DialogoContatto;
 
 public class ContentPanel extends JPanel{
 	
@@ -86,15 +86,48 @@ public class ContentPanel extends JPanel{
 			gbc.gridy = 2;
 			gbc.weightx = 0.0;
 			gbc.weighty = 0.0;
-			acquista = new JButton("acquista");
-				//acquista.addActionListener(null);
-			annuncio.add(acquista, gbc);
-				
+			if(model.login != null) {
+				if(a.getUtente().getEmail() == model.login.getEmail()){
+					rimuovi = new JButton("Rimuovi");
+					rimuovi.addActionListener(new ActionListener(){
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							try {
+								model.rimuoviAnnuncio(model.login.getEmail(), a.getCodice());
+								upDateView(model.getBacheca());
+							} catch (BachecaException e1) {
+								e1.printStackTrace();
+							}
+						}
+					});
+					annuncio.add(rimuovi, gbc);
+					
+				}
+				else {
+					if(a.getTipologia() == 'v'){
+						acquista = new JButton("acquista");
+						annuncio.add(acquista, gbc);
+					}else {
+						acquista = new JButton("vendi");
+						annuncio.add(acquista, gbc);
+					}
+				}
+				}
+			/*if(a.getTipologia() == 'v'){
+				acquista = new JButton("acquista");
+				annuncio.add(acquista, gbc);
+			}else {
+				acquista = new JButton("vendi");
+				annuncio.add(acquista, gbc);
+			}*/
+			System.out.println(a.getTipologia());
+			
 			gbcTop.gridx = x;
 			gbcTop.gridy = y;
 			gbc.weightx = 0.0;
 			gbc.weighty = 0.0;
 			add(annuncio, gbcTop);
+			System.out.println(y + " "+x);
 			x++;
 			if(x == 3) {
 				x = 0;
@@ -104,7 +137,11 @@ public class ContentPanel extends JPanel{
 	}
 		x = 0;
 		y = 0;
+		if(BachecaGui.BachecaPanel != null) {
+			BachecaGui.BachecaPanel.revalidate();
+			BachecaGui.BachecaPanel.repaint();
 		}
+}
 			
 	
 	public void creaInserz(Annuncio a) throws BachecaException {
@@ -127,64 +164,5 @@ public class ContentPanel extends JPanel{
 		else {
 			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Acquisto " + a.getUtente().getNome(a.getUtente())));
 		}
-		GridBagConstraints gbc = new GridBagConstraints();
-		GridBagConstraints gbcTop = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0; 
-		gbc.weightx = 0.0;
-		gbc.weighty = 0.0;
-		annuncio.add(nom, gbc);
-			
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.weightx = 0.0;
-		gbc.weighty = 0.0;
-		annuncio.add(nomArt, gbc);
-			
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.weightx = 0.0;
-		gbc.weighty = 0.0;
-		annuncio.add(prez, gbc);
-			
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		gbc.weightx = 0.0;
-		gbc.weighty = 0.0;
-		annuncio.add(prezArt, gbc);
-			
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		gbc.weightx = 0.0;
-		gbc.weighty = 0.0;
-		if(model.login != null) {
-			if(a.getUtente().getEmail() == model.login.getEmail()){
-				rimuovi = new JButton("Rimuovi");
-				rimuovi.addActionListener(new DialogoContatto().rimuoviAnn("Rimuovi", a)); //= new DialogoContatto().rimuoviAnn("rimuovi", a);
-				/*rimuovi.addActionListener(new ActionListener(){
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						try {
-							model.rimuoviAnnuncio(model.login.getEmail(), a.getCodice());
-							upDateView(model.getBacheca());
-						} catch (BachecaException e1) {
-							e1.printStackTrace();
-						}
-					}
-				});*/
-				//upDateView(model.getBacheca());
-				annuncio.add(rimuovi, gbc);
-			}else {
-				acquista = new JButton("acquista");
-				//acquista.addActionListener(null);
-				annuncio.add(acquista, gbc);
-			}
-		}
-		gbcTop.gridx = x;
-		gbcTop.gridy = y;
-		gbc.weightx = 0.0;
-		gbc.weighty = 0.0;
-		add(annuncio, gbcTop);
-		System.out.println(y + " "+x);
 	}
 }

@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import gui.contollo.*;
 
 public class BachecaPanel extends JPanel{
+	JPanel vistaBacheca;
 	public BachecaPanel(Bacheca model) throws BachecaException {
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -19,9 +20,14 @@ public class BachecaPanel extends JPanel{
 		ControlloBacheca controllo = new ControlloBacheca(contenutoBacheca, model);
 		OpsPanel operazioneBacheca = new OpsPanel(controllo);
 		
-		JPanel vistaBacheca = new JPanel();
+		vistaBacheca = new JPanel();
 		vistaBacheca.add(contenutoBacheca);
 		add(vistaBacheca, BorderLayout.CENTER);
 		add(operazioneBacheca, BorderLayout.NORTH);
+	}
+	
+	public void aggiorna() {
+		revalidate();
+		repaint();
 	}
 }

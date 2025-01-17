@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import bachecaAnnunci.Annuncio;
 import main.main;
@@ -34,15 +35,9 @@ public class ControlloBacheca implements ActionListener{
 		if(source.getText().equals("Aggiungi")) {
 			System.out.println("Aggiungi");
 			try {
-				try {
-					input = new DialogoContatto().getInputs("Aggiungi", u);
-				} catch (BachecaException e1) {
-					e1.printStackTrace();
-				}
-				
-			} catch (UtenteException | AnnuncioException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				input = new DialogoContatto().getInputs("Aggiungi", u);
+			} catch (UtenteException | AnnuncioException | BachecaException | NumberFormatException e1) {
+				JOptionPane.showMessageDialog(null,  e1.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
 			}
 			if(input !=null) {
 				System.out.println("Aggiungi");
@@ -58,6 +53,7 @@ public class ControlloBacheca implements ActionListener{
 			System.out.println("Cerca");
 			try {
 				input = new DialogoContatto().getCerca("Cerca");
+				System.out.println(input.toString());
 			} catch (BachecaException e1) {
 				e1.printStackTrace();
 			}
@@ -76,12 +72,43 @@ public class ControlloBacheca implements ActionListener{
 				u = new DialogoContatto().inputUtente("login");
 				model.login = u;
 			} catch (UtenteException e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null,  e1.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
 			};
-		}else if(source.getText().equals("Rimuovi")) {
-			System.out.println("rimuovi");
+			try {
+				view.upDateView(model.getBacheca());
+			} catch (BachecaException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}else if(source.getText().equals("Pulisci Bacheca")) {
 			System.out.println("Pulisci Bacheca");
+			try {
+				input = new DialogoContatto().inputPulisci("Pulisci Bacheca");
+			} catch (BachecaException e1) {
+				e1.printStackTrace();
+			}
+			if(input !=null) {
+				System.out.println("Cerca");
+			}
+			try {
+				view.upDateView(input);
+			} catch (BachecaException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}else if(source.getText().equals("Mostra Bacheca")) {
+			try {
+				input = new DialogoContatto().mostraBacheca("Mostra Bacheca");
+			} catch (BachecaException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				view.upDateView(input);
+			} catch (BachecaException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }
