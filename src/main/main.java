@@ -11,7 +11,7 @@ import gui.BachecaGui;
 import gui.contollo.*;
 
 public class main {
-	private static Bacheca bacheca;
+	public static Bacheca bacheca;
 	public static void main(String[] args) throws BachecaException, AnnuncioException, UtenteException{
 		Utente utente1 = new Utente("dani@gmail.com", "Dani");
 		Utente utente2 = new Utente("Luca@gmail.com", "Luca");
@@ -26,15 +26,15 @@ public class main {
 		bacheca.aggiungiAnnuncio(annuncio2); 
 		bacheca.aggiungiAnnuncio(annuncio3);
 		
-		//interfacciaGrafica();
+		interfacciaGrafica();
 		interfacciaRigaComando();
 	}
 	
 	private static void interfacciaRigaComando() throws AnnuncioException, UtenteException, BachecaException {
-		new InterfacciaRigaComando().start();
+		//new InterfacciaRigaComando().start();
 	}
-	/*private static void interfacciaGrafica() {	
+	
 	private static void interfacciaGrafica() throws BachecaException {
 		new BachecaGui(bacheca);
-	}*/
+	}
 }

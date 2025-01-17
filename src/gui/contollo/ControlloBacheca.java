@@ -2,6 +2,7 @@ package gui.contollo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
@@ -19,9 +20,9 @@ public class ControlloBacheca implements ActionListener{
 	
 	private Bacheca model;
 	private ContentPanel view;   //Campi del contollo
-	private Annuncio input = null;
+	private ArrayList<Annuncio> input;
 	public Utente u;
-	
+	  
 	public ControlloBacheca(ContentPanel view, Bacheca model) {
 		this.model = model;
 		this.view = view;
@@ -33,18 +34,21 @@ public class ControlloBacheca implements ActionListener{
 		if(source.getText().equals("Aggiungi")) {
 			System.out.println("Aggiungi");
 			try {
-				input = new DialogoContatto().getInputs("Aggiungi", u);
+				try {
+					input = new DialogoContatto().getInputs("Aggiungi", u);
+				} catch (BachecaException e1) {
+					e1.printStackTrace();
+				}
 				
 			} catch (UtenteException | AnnuncioException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			if(input !=null) {
-				model.aggiungiAnnuncio(input);
 				System.out.println("Aggiungi");
 			}
 			try {
-				view.upDateView("");
+				view.upDateView(input);
 			} catch (BachecaException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -52,12 +56,16 @@ public class ControlloBacheca implements ActionListener{
 			
 		}else if(source.getText().equals("Cerca")) {
 			System.out.println("Cerca");
-			String cerca = new DialogoContatto().getCerca("Cerca");
+			try {
+				input = new DialogoContatto().getCerca("Cerca");
+			} catch (BachecaException e1) {
+				e1.printStackTrace();
+			}
 			if(input !=null) {
 				System.out.println("Cerca");
 			}
 			try {
-				view.upDateView(cerca);
+				view.upDateView(input);
 			} catch (BachecaException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -70,14 +78,10 @@ public class ControlloBacheca implements ActionListener{
 			} catch (UtenteException e1) {
 				e1.printStackTrace();
 			};
-			try {
-				view.upDateView("");
-			} catch (BachecaException e1) {
-				e1.printStackTrace();
-			}
 		}else if(source.getText().equals("Rimuovi")) {
 			System.out.println("rimuovi");
-			
+		}else if(source.getText().equals("Pulisci Bacheca")) {
+			System.out.println("Pulisci Bacheca");
 		}
 	}
 }

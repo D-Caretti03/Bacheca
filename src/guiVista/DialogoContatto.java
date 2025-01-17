@@ -2,6 +2,7 @@ package guiVista;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -9,8 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import bachecaAnnunci.Annuncio;
+import bachecaAnnunci.Bacheca;
 import bachecaAnnunci.Utente;
+import main.main;
 import exceptions.AnnuncioException;
+import exceptions.BachecaException;
 import exceptions.UtenteException;
 
 import javax.swing.JOptionPane;
@@ -42,33 +46,33 @@ public class DialogoContatto {
 		cercaPanel = new JComponent[] { new JLabel("Articolo"), nomArt};
 		inputUtente = new JComponent[] { new JLabel("Nome Utente"), nomeUtente, new JLabel("e-mail Utente"), emailUtente};
 	}
-
-	public Annuncio getInputs(String msg, Utente u) throws UtenteException, AnnuncioException {
-		Annuncio res = null;	
+  
+	public ArrayList<Annuncio> getInputs(String msg, Utente u) throws UtenteException, AnnuncioException, BachecaException {	
+		Annuncio a = null;
 		int result = JOptionPane.showConfirmDialog(null, addPanel, msg, JOptionPane.CANCEL_OPTION);		
 		if (result == JOptionPane.OK_OPTION) { 
-			if(check.isSelected()) {
+			if(!check.isSelected()) {
 				tipologia = 'a';
-				res = new Annuncio(u, tipologia, nomArt.getText(), Double.parseDouble(prezzo.getText()), cat.getText(), cod++);
+				a = new Annuncio(u, tipologia, nomArt.getText(), Double.parseDouble(prezzo.getText()), cat.getText(), cod++);
 			}else {
 				tipologia = 'v';
 				LocalDate dataF = LocalDate.parse(data.getText());
-				res = new Annuncio(u, tipologia, nomArt.getText(), Double.parseDouble(prezzo.getText()), cat.getText(), dataF, cod++);
+				a = new Annuncio(u, tipologia, nomArt.getText(), Double.parseDouble(prezzo.getText()), cat.getText(), dataF, cod++);
 			}
-			return res;
+			main.bacheca.aggiungiAnnuncio(a);
+			return main.bacheca.getBacheca();
 		} else {
 			return null;
 		}
 	}
 	
-	public String getCerca(String msg) {
-		String res;
-		ContentPanel.x = 0;
-		ContentPanel.y = 0;
+	public ArrayList<Annuncio> getCerca(String msg) throws BachecaException {
+		ArrayList<Annuncio> res;  
 		int result = JOptionPane.showConfirmDialog(null, cercaPanel, msg, JOptionPane.CANCEL_OPTION);		
 		if (result == JOptionPane.OK_OPTION) { 
-			return res = nomArt.getText();
-		}else {
+			return main.bacheca.listaAnnunciParolaChiave(nomArt.getText());
+		}
+		else {
 			return null;
 		}
 	}
@@ -81,4 +85,21 @@ public class DialogoContatto {
 			return null;
 		}
 	}
+	
+	public ArrayList<Annuncio> inputPulisci(String msg) throws BachecaException{
+		ArrayList<Annuncio> res;  
+		int result = JOptionPane.showConfirmDialog(null, cercaPanel, msg, JOptionPane.CANCEL_OPTION);		
+		if (result == JOptionPane.OK_OPTION) { 
+			main.bacheca.pulisciBacheca();
+			return main.bacheca.getBacheca();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	public static void rimuoviAnn(String msg, Annuncio a) throws BachecaException{
+		main.bacheca.rimuoviAnnuncio(a.getUtente().getEmail(), a.getCodice());
+	}
+	
 }

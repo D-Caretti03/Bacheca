@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,9 +21,10 @@ import bachecaAnnunci.Bacheca;
 import bachecaAnnunci.Utente;
 import exceptions.BachecaException;
 import gui.contollo.ControlloBacheca;
+import guiVista.DialogoContatto;
 
 public class ContentPanel extends JPanel{
-
+	
 	//private static final ActionListener null = null;
 	private Bacheca model;
 	private JPanel annuncio;
@@ -39,14 +41,14 @@ public class ContentPanel extends JPanel{
 		this.model = model;
 		setLayout(new GridBagLayout());
 			
-		upDateView("");
+		upDateView(model.getBacheca());
 		
 	}
 	
-	public void upDateView(String ricerca) throws BachecaException {
+	public void upDateView(ArrayList<Annuncio> list) throws BachecaException {
 		removeAll();
-		if(ricerca == "") {
-		for(Annuncio a : model) {
+		if(list != null) {
+		for(Annuncio a : list) {
 			creaInserz(a);
 			if(a.getTipologia() == 'v') {
 				annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Vendita"));
@@ -99,35 +101,31 @@ public class ContentPanel extends JPanel{
 				y++;
 			}
 		}
-		}else{
-				for(Annuncio a : model.listaAnnunciParolaChiave(ricerca)) {
-					creaInserz(a);
-				}
-			}
+	}
 		x = 0;
 		y = 0;
 		}
 			
 	
-	public void creaInserz(Annuncio a) {
+	public void creaInserz(Annuncio a) throws BachecaException {
 		annuncio = new JPanel();
 		annuncio.setLayout(new GridBagLayout());
 		nom = new JLabel("Prodotto: ");
 		nomArt = new JTextField(15);
 		prez = new JLabel("Prezzo: ");
 		prezArt = new JTextField(15);
-		nomArt.setText(ann.getArticolo());
+		nomArt.setText(a.getArticolo());
 		nomArt.setEditable(false);
-		prezArt.setText(Double.toString(ann.getPrezzo()));
-		nomArt.setText(a.getArticolo(a));
+		prezArt.setText(Double.toString(a.getPrezzo()));
+		nomArt.setText(a.getArticolo());
 		nomArt.setEditable(false);
-		prezArt.setText(Double.toString(a.getPrezzo(a)));
+		prezArt.setText(Double.toString(a.getPrezzo()));
 		prezArt.setEditable(false);
-		if(a.getTipologia(a) == 'v') {
-			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Vendita: " + a.getUtente(a).getNome(a.getUtente(a))));
+		if(a.getTipologia() == 'v') {
+			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Vendita: " + a.getUtente().getNome(a.getUtente())));
 		}
 		else {
-			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Acquisto " + a.getUtente(a).getNome(a.getUtente(a))));
+			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Acquisto " + a.getUtente().getNome(a.getUtente())));
 		}
 		GridBagConstraints gbc = new GridBagConstraints();
 		GridBagConstraints gbcTop = new GridBagConstraints();
@@ -160,19 +158,21 @@ public class ContentPanel extends JPanel{
 		gbc.weightx = 0.0;
 		gbc.weighty = 0.0;
 		if(model.login != null) {
-			if(a.getUtente(a).getEmail() == model.login.getEmail()){
+			if(a.getUtente().getEmail() == model.login.getEmail()){
 				rimuovi = new JButton("Rimuovi");
-				rimuovi.addActionListener(new ActionListener(){
+				rimuovi.addActionListener(new DialogoContatto().rimuoviAnn("Rimuovi", a)); //= new DialogoContatto().rimuoviAnn("rimuovi", a);
+				/*rimuovi.addActionListener(new ActionListener(){
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						try {
-							model.rimuoviAnnuncio(model.login.getEmail(), a.getCodice(a));
-							upDateView("");
+							model.rimuoviAnnuncio(model.login.getEmail(), a.getCodice());
+							upDateView(model.getBacheca());
 						} catch (BachecaException e1) {
 							e1.printStackTrace();
 						}
 					}
-				});
+				});*/
+				//upDateView(model.getBacheca());
 				annuncio.add(rimuovi, gbc);
 			}else {
 				acquista = new JButton("acquista");
@@ -186,10 +186,5 @@ public class ContentPanel extends JPanel{
 		gbc.weighty = 0.0;
 		add(annuncio, gbcTop);
 		System.out.println(y + " "+x);
-		x++;
-		if(x == 3) {
-			x = 0;
-			y++;
-		}
 	}
 }

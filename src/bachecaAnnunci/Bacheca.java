@@ -57,7 +57,7 @@ public class Bacheca implements Iterable<Annuncio>{
 			throw new BachecaException(Costanti.ECC_CODICE_ERR);
 		for(Annuncio a: bacheca) {
 			Utente u = a.getUtente();
-			if(!(u.getEmail().equals(email)) && codice == a.getCodice(a))
+			if(!(u.getEmail().equals(email)) && codice == a.getCodice())
 				throw new BachecaException(Costanti.ECC_NON_PROPRIETARIO);
 			else
 				elim = getAnnuncio(codice);
@@ -93,5 +93,8 @@ public class Bacheca implements Iterable<Annuncio>{
 		}
 		return bacheca.removeAll(elim);
 	}
-
+	
+	public ArrayList<Annuncio> getBacheca(){
+		return this.bacheca;
+	}
 }
