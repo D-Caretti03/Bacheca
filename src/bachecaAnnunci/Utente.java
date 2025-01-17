@@ -30,4 +30,8 @@ public class Utente {
 		return this.email;
 	}
 	
+	public String getNome(Utente u) {
+		return nome;
+	}
+	
 }

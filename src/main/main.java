@@ -8,6 +8,7 @@ import exceptions.AnnuncioException;
 import exceptions.BachecaException;
 import exceptions.UtenteException;
 import gui.BachecaGui;
+import gui.contollo.*;
 
 public class main {
 	private static Bacheca bacheca;
@@ -32,7 +33,8 @@ public class main {
 	private static void interfacciaRigaComando() throws AnnuncioException, UtenteException, BachecaException {
 		new InterfacciaRigaComando().start();
 	}
-	/*private static void interfacciaGrafica() {
+	/*private static void interfacciaGrafica() {	
+	private static void interfacciaGrafica() throws BachecaException {
 		new BachecaGui(bacheca);
 	}*/
 }

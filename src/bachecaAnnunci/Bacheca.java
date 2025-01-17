@@ -10,7 +10,7 @@ import utilities.Costanti;
 
 public class Bacheca implements Iterable<Annuncio>{
 	private ArrayList<Annuncio> bacheca;
-
+	public Utente login;
 	public Bacheca() {
 		super();
 		bacheca = new ArrayList<Annuncio>();
@@ -57,7 +57,7 @@ public class Bacheca implements Iterable<Annuncio>{
 			throw new BachecaException(Costanti.ECC_CODICE_ERR);
 		for(Annuncio a: bacheca) {
 			Utente u = a.getUtente();
-			if(!(u.getEmail().equals(email)) && codice == a.getCodice())
+			if(!(u.getEmail().equals(email)) && codice == a.getCodice(a))
 				throw new BachecaException(Costanti.ECC_NON_PROPRIETARIO);
 			else
 				elim = getAnnuncio(codice);

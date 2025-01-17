@@ -1,6 +1,10 @@
 /utilities/
 /bachecaAnnunci/
+<<<<<<< HEAD
 /commandLine/
 /main/
 /test/
 /guiVista/
+=======
+/test/
+>>>>>>> dcba091 (Aggiornamento GUI)

@@ -45,6 +45,7 @@ class BachecaTest {
 		b.aggiungiAnnuncio(a1);
 		b.aggiungiAnnuncio(a2);
 		assertTrue(b.rimuoviAnnuncio(u.getEmail(), 0));
+		assertFalse(b.rimuoviAnnuncio(u.getEmail(), 2));
 	}
 	
 	@Test
