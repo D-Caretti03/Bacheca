@@ -43,7 +43,7 @@ public class DialogoContatto {
 		nomeUtente = new JTextField(15);
 		emailUtente = new JTextField(15);
 		
-		addPanel = new JComponent[] { new JLabel("Articolo"), nomArt, new JLabel("Parole chiave (separate da ,)"), cat, check, new JLabel("Prezzo"), prezzo, new JLabel("Data (AAAA-MM-GG)"), data};
+		addPanel = new JComponent[] { new JLabel("Articolo"), nomArt, new JLabel("Parole chiave (separate da ,)"), cat, check, new JLabel("Prezzo"), prezzo, new JLabel("Data Scadenza (AAAA-MM-GG)"), data};
 		cercaPanel = new JComponent[] { new JLabel("Articolo"), nomArt};
 		inputUtente = new JComponent[] { new JLabel("Nome Utente"), nomeUtente, new JLabel("e-mail Utente"), emailUtente};
 	}
@@ -52,21 +52,25 @@ public class DialogoContatto {
 		Annuncio a = null;
 		int result = JOptionPane.showConfirmDialog(null, addPanel, msg, JOptionPane.CANCEL_OPTION);		
 		if(check.isSelected()) {
-			System.out.println("vendita");
 			if(data.getText().isBlank()) throw new AnnuncioException(Costanti.ECC_DATA_NULL);
 			tipologia = 'v';
 			LocalDate dataF = LocalDate.parse(data.getText());
 			a = new Annuncio(u, tipologia, nomArt.getText(), Double.parseDouble(prezzo.getText()), cat.getText(), dataF, cod++);
 			
 		}else {
-			System.out.println("acquisto");
 			tipologia = 'a';
 			a = new Annuncio(u, tipologia, nomArt.getText(), Double.parseDouble(prezzo.getText()), cat.getText(), cod++);
+			main.bacheca.listaAnnunciParolaChiave(cat.getText());
 		}
-		if (result == JOptionPane.OK_OPTION) { 
+		if (result == JOptionPane.OK_OPTION && tipologia == 'a') { 
 			main.bacheca.aggiungiAnnuncio(a);
 			return main.bacheca.listaAnnunciParolaChiave(cat.getText());
-		} else {
+		} 
+		else if(result == JOptionPane.OK_OPTION && tipologia == 'v') {
+			main.bacheca.aggiungiAnnuncio(a);
+			return main.bacheca.getBacheca();
+		}
+		else {
 			return main.bacheca.getBacheca();
 		}
 	}
@@ -76,7 +80,6 @@ public class DialogoContatto {
 		int result = JOptionPane.showConfirmDialog(null, cercaPanel, msg, JOptionPane.CANCEL_OPTION);		
 		if (result == JOptionPane.OK_OPTION) { 
 			res =  main.bacheca.listaAnnunciParolaChiave(nomArt.getText());
-			System.out.println(main.bacheca.listaAnnunciParolaChiave(""));
 			return res;
 		}
 		else {

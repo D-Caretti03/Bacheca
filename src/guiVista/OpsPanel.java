@@ -11,7 +11,7 @@ public class OpsPanel extends JPanel{
 	public OpsPanel(ControlloBacheca controllo) {
 		setLayout(new FlowLayout());
 		
-		JButton login = new JButton("login");
+		JButton login = new JButton("Login");
 		JButton addAnnuncio = new JButton("Aggiungi");
 		JButton cerca = new JButton("Cerca");
 		JButton rimuoviAnnuncio = new JButton("Pulisci Bacheca");

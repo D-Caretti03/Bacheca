@@ -28,7 +28,7 @@ public class InterfacciaRigaComando {
 	public InterfacciaRigaComando(Bacheca b, int cod) {
 		super();
 		this.b = b;
-		this.codice=cod;
+		InterfacciaRigaComando.codice=cod;
 	}
 
 	public void start() throws AnnuncioException, UtenteException, BachecaException {
@@ -47,7 +47,7 @@ public class InterfacciaRigaComando {
 				default -> System.out.println("Errore, inserisci una scelta tra quelle proposte");
 			}
 		}
-		System.exit(0);
+		exit();
 	}
 
 	private void stampaMenu() {
@@ -106,6 +106,11 @@ public class InterfacciaRigaComando {
 	
 	public void pulisciBacheca() throws BachecaException {
 		b.pulisciBacheca();
+	}
+	
+	public void exit() {
+		System.out.println("\nUscita dalla sessione Bacheca Annunci: Arrivederci!\n");
+		System.exit(1);
 	}
 	
 }

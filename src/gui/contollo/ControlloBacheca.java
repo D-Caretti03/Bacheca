@@ -33,14 +33,10 @@ public class ControlloBacheca implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
 		if(source.getText().equals("Aggiungi")) {
-			System.out.println("Aggiungi");
 			try {
 				input = new DialogoContatto().getInputs("Aggiungi", u);
 			} catch (UtenteException | AnnuncioException | BachecaException | NumberFormatException e1) {
 				JOptionPane.showMessageDialog(null,  e1.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
-			}
-			if(input !=null) {
-				System.out.println("Aggiungi");
 			}
 			try {
 				view.upDateView(input);
@@ -50,15 +46,10 @@ public class ControlloBacheca implements ActionListener{
 			}
 			
 		}else if(source.getText().equals("Cerca")) {
-			System.out.println("Cerca");
 			try {
 				input = new DialogoContatto().getCerca("Cerca");
-				System.out.println(input.toString());
 			} catch (BachecaException e1) {
 				e1.printStackTrace();
-			}
-			if(input !=null) {
-				System.out.println("Cerca");
 			}
 			try {
 				view.upDateView(input);
@@ -66,10 +57,9 @@ public class ControlloBacheca implements ActionListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		}else if(source.getText().equals("login")) {
-			System.out.println("login");
+		}else if(source.getText().equals("Login")) {
 			try {
-				u = new DialogoContatto().inputUtente("login");
+				u = new DialogoContatto().inputUtente("Login");
 				model.login = u;
 			} catch (UtenteException e1) {
 				JOptionPane.showMessageDialog(null,  e1.getMessage(), "ERROR", JOptionPane.WARNING_MESSAGE);
@@ -81,14 +71,10 @@ public class ControlloBacheca implements ActionListener{
 				e1.printStackTrace();
 			}
 		}else if(source.getText().equals("Pulisci Bacheca")) {
-			System.out.println("Pulisci Bacheca");
 			try {
 				input = new DialogoContatto().inputPulisci("Pulisci Bacheca");
 			} catch (BachecaException e1) {
 				e1.printStackTrace();
-			}
-			if(input !=null) {
-				System.out.println("Cerca");
 			}
 			try {
 				view.upDateView(input);

@@ -34,6 +34,10 @@ public class ContentPanel extends JPanel{
 	private JTextField prezArt;
 	private JButton acquista;
 	private JButton rimuovi;
+	private JLabel data;
+	private JTextField dataArt;
+	private JLabel pChiave;
+	private JTextArea pChiaveArt;
 	ControlloBacheca controllo;
 	static int x = 0;
 	static int y = 0;
@@ -81,13 +85,40 @@ public class ContentPanel extends JPanel{
 			gbc.weightx = 0.0;
 			gbc.weighty = 0.0;
 			annuncio.add(prezArt, gbc);
-				
+			
 			gbc.gridx = 0;
 			gbc.gridy = 2;
 			gbc.weightx = 0.0;
 			gbc.weighty = 0.0;
+			annuncio.add(pChiave, gbc);
+			
+			gbc.gridx = 1;
+			gbc.gridy = 2;
+			gbc.weightx = 0.0;
+			gbc.weighty = 0.0;
+			gbc.fill = GridBagConstraints.BOTH;
+			annuncio.add(pChiaveArt, gbc);
+			
+			if(a.getTipologia() == 'v') {
+				gbc.gridx = 0;
+				gbc.gridy = 3;
+				gbc.weightx = 0.0;
+				gbc.weighty = 0.0;
+				annuncio.add(data, gbc);
+				
+				gbc.gridx = 1;
+				gbc.gridy = 3;
+				gbc.weightx = 0.0;
+				gbc.weighty = 0.0;
+				annuncio.add(dataArt, gbc);
+			}
+			
+			gbc.gridx = 0;
+			gbc.gridy = 4;
+			gbc.weightx = 0.0;
+			gbc.weighty = 0.0;
 			if(model.login != null) {
-				if(a.getUtente().getEmail() == model.login.getEmail()){
+				if(a.getUtente().getEmail().equals(model.login.getEmail())){
 					rimuovi = new JButton("Rimuovi");
 					rimuovi.addActionListener(new ActionListener(){
 						@Override
@@ -100,34 +131,24 @@ public class ContentPanel extends JPanel{
 							}
 						}
 					});
-					annuncio.add(rimuovi, gbc);
-					
+					annuncio.add(rimuovi, gbc);		
 				}
 				else {
 					if(a.getTipologia() == 'v'){
-						acquista = new JButton("acquista");
+						acquista = new JButton("Acquista");
 						annuncio.add(acquista, gbc);
 					}else {
-						acquista = new JButton("vendi");
+						acquista = new JButton("Vendi");
 						annuncio.add(acquista, gbc);
 					}
 				}
 				}
-			/*if(a.getTipologia() == 'v'){
-				acquista = new JButton("acquista");
-				annuncio.add(acquista, gbc);
-			}else {
-				acquista = new JButton("vendi");
-				annuncio.add(acquista, gbc);
-			}*/
-			System.out.println(a.getTipologia());
 			
 			gbcTop.gridx = x;
 			gbcTop.gridy = y;
 			gbc.weightx = 0.0;
 			gbc.weighty = 0.0;
 			add(annuncio, gbcTop);
-			System.out.println(y + " "+x);
 			x++;
 			if(x == 3) {
 				x = 0;
@@ -154,15 +175,22 @@ public class ContentPanel extends JPanel{
 		nomArt.setText(a.getArticolo());
 		nomArt.setEditable(false);
 		prezArt.setText(Double.toString(a.getPrezzo()));
-		nomArt.setText(a.getArticolo());
-		nomArt.setEditable(false);
 		prezArt.setText(Double.toString(a.getPrezzo()));
 		prezArt.setEditable(false);
+		pChiave = new JLabel("Parole chiave: ");
+		pChiaveArt = new JTextArea(a.getParolaChiave());
+		pChiaveArt.setLineWrap(true);
+		pChiaveArt.setWrapStyleWord(true);
+		pChiaveArt.setEditable(false);
 		if(a.getTipologia() == 'v') {
-			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Vendita: " + a.getUtente().getNome(a.getUtente())));
+			data = new JLabel("Data scadenza: ");
+			dataArt = new JTextField(15);
+			dataArt.setText(a.getDate().toString());
+			dataArt.setEditable(false);
+			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Vendita: " + a.getUtente().getNome()));
 		}
 		else {
-			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Acquisto " + a.getUtente().getNome(a.getUtente())));
+			annuncio.setBorder(BorderFactory.createTitledBorder("Annuncio di Acquisto " + a.getUtente().getNome()));
 		}
 	}
 }

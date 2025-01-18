@@ -1,5 +1,7 @@
 package main;
 
+import java.time.LocalDate;
+
 import bachecaAnnunci.Annuncio;
 import bachecaAnnunci.Bacheca;
 import bachecaAnnunci.Utente;
@@ -17,9 +19,12 @@ public class main {
 		Utente utente2 = new Utente("Luca@gmail.com", "Luca");
 		Utente utente3 = new Utente("giio@gmail.com", "Giio");
 		
-		Annuncio annuncio1 = new Annuncio(utente1, 'v', "Collana", 50.0, "Gioielli", cod++);
-		Annuncio annuncio2 = new Annuncio(utente2, 'v', "Orecchini", 20.0, "Gioielli", cod++);
-		Annuncio annuncio3 = new Annuncio(utente1, 'a', " Bello mondo", 12.5, "Libri", cod++);
+		LocalDate data1 = LocalDate.of(2025, 8, 2);
+		LocalDate data2 = LocalDate.of(2026, 10, 23);
+		
+		Annuncio annuncio1 = new Annuncio(utente1, 'v', "Collana", 50.0, "Gioielli, oro, diamanti, lucida, brillante", data2, cod++);
+		Annuncio annuncio2 = new Annuncio(utente2, 'v', "Orecchini", 20.0, "Gioielli", data1,cod++);
+		Annuncio annuncio3 = new Annuncio(utente3, 'a', "Bello mondo", 12.5, "Libri", cod++);
 		
 		bacheca = new Bacheca();
 		bacheca.aggiungiAnnuncio(annuncio1);
