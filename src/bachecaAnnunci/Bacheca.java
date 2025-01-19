@@ -17,8 +17,7 @@ public class Bacheca implements Iterable<Annuncio>{
 	}
 	
 	public boolean aggiungiAnnuncio(Annuncio a) {
-		bacheca.add(a);
-		return true;
+		return bacheca.add(a);
 	}
 
 	public ArrayList<Annuncio> listaAnnunciParolaChiave(String parolaChiave) throws BachecaException{
