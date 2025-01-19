@@ -19,4 +19,5 @@ public class Costanti {
 	public static final String ECC_TIPO_ERR = "La tipologia deve essere: 'a' acquisto oppure 'v' vendita";
 	public static final String ECC_DATA_NULL = "La data non può essere null";
 	public static final String ECC_DATA_ACQ = "Un annuncio di acquisto non può avere una data di scadenza";
+	public static final String ECC_NODATA_VEND = "Un annuncio di vendita deve avere la data di scadenza";
 }
