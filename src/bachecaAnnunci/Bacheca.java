@@ -81,7 +81,7 @@ public class Bacheca implements Iterable<Annuncio>{
 		return "";
 	}
 	
-	public boolean pulisciBacheca() throws BachecaException{
+	public boolean pulisciBacheca(){
 		LocalDate oggi = LocalDate.now(); 
 		ArrayList<Annuncio> elim = new ArrayList<Annuncio>();
 		for(Annuncio a: bacheca) {
