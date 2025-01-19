@@ -60,7 +60,8 @@ public class Annuncio{
 	public Annuncio(Utente utente, char tipologia, String articolo, double prezzo, String parolaChiave, int codice) throws AnnuncioException{
 		super();
 		this.utente = utente;
-		if(tipologia != 'a') throw new AnnuncioException(Costanti.ECC_TIPO_ERR);
+		if(tipologia == 'v') throw new AnnuncioException(Costanti.ECC_NODATA_VEND);
+		if(tipologia != 'a' && tipologia != 'v') throw new AnnuncioException(Costanti.ECC_TIPO_ERR);
 		if(articolo == null) throw new AnnuncioException(Costanti.ECC_ART_NULL);
 		if(articolo.isBlank()) throw new AnnuncioException(Costanti.ECC_ART_VUOTO);
 		if(prezzo < 0) throw new AnnuncioException(Costanti.ECC_PREZZO_NEG);
