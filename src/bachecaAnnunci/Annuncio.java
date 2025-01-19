@@ -38,6 +38,7 @@ public class Annuncio{
 		LocalDate oggi = LocalDate.now();
 		if(scadenza == null)throw new AnnuncioException(Costanti.ECC_DATA_NULL);
 		if(scadenza.isBefore(oggi)) throw new AnnuncioException(Costanti.ECC_DATA_PASSATA);
+		if(tipologia == 'a' && scadenza != null) throw new AnnuncioException(Costanti.ECC_DATA_ACQ);
 		this.tipologia = tipologia;
 		this.articolo = articolo;
 		this.prezzo = prezzo;

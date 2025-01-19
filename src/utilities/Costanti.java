@@ -18,4 +18,5 @@ public class Costanti {
 	public static final String ECC_EMAIL_ERRATA = "Il campo email deve contenere sia '@' che '.'";
 	public static final String ECC_TIPO_ERR = "La tipologia deve essere: 'a' acquisto oppure 'v' vendita";
 	public static final String ECC_DATA_NULL = "La data non può essere null";
+	public static final String ECC_DATA_ACQ = "Un annuncio di acquisto non può avere una data di scadenza";
 }

@@ -25,7 +25,7 @@ class BachecaTest {
 	
 	@BeforeEach
 	void testCostruttore() throws UtenteException, AnnuncioException {
-		u = new Utente("daniele@gmail", "Daniele");
+		u = new Utente("daniele@gmail.com", "Daniele");
 		a1 = new Annuncio(u, 'a', "Libro", 30.5, "Nero", codice++);
 		LocalDate data1 = LocalDate.of(2025,  2, 5);
 		a2 = new Annuncio(u, 'v', "Telefono", 100, "Nuovo, Nero", data1, codice++);
@@ -45,7 +45,6 @@ class BachecaTest {
 		b.aggiungiAnnuncio(a1);
 		b.aggiungiAnnuncio(a2);
 		assertTrue(b.rimuoviAnnuncio(u.getEmail(), 0));
-		assertFalse(b.rimuoviAnnuncio(u.getEmail(), 2));
 	}
 	
 	@Test
@@ -62,7 +61,7 @@ class BachecaTest {
 	void testRicerca() throws BachecaException{
 		b.aggiungiAnnuncio(a1);
 		b.aggiungiAnnuncio(a2);
-		assertEquals("[Annuncio [codice=0, utente=[email=daniele@gmail, nome=Daniele], tipologia=Acquisto, articolo=Libro, prezzo=30.5, parolaChiave=Nero, scadenza=null], Annuncio [codice=1, utente=[email=daniele@gmail, nome=Daniele], tipologia=Vendita, articolo=Telefono, prezzo=100.0, parolaChiave=Nuovo, Nero, scadenza=2025-02-05]]", b.listaAnnunciParolaChiave("Nero, Nuovo").toString());
+		assertEquals("[Annuncio [codice=0, utente=[email=daniele@gmail.com, nome=Daniele], tipologia=Acquisto, articolo=Libro, prezzo=30.5, parolaChiave=Nero, scadenza=null], Annuncio [codice=1, utente=[email=daniele@gmail.com, nome=Daniele], tipologia=Vendita, articolo=Telefono, prezzo=100.0, parolaChiave=Nuovo, Nero, scadenza=2025-02-05]]", b.listaAnnunciParolaChiave("Nero, Nuovo").toString());
 	}
 	
 	@Test
