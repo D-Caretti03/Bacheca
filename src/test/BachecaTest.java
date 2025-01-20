@@ -16,6 +16,9 @@ import exceptions.BachecaException;
 import exceptions.UtenteException;
 import utilities.Costanti;
 
+/**
+ * Classe test dove viene testata la bacheca con le sue operazioni
+ */
 class BachecaTest {
 
 	Utente u;
@@ -23,6 +26,11 @@ class BachecaTest {
 	Bacheca b;
 	int codice = 0;
 	
+	/**
+	 * prima di ogni test vengono creati e aggiunti degli annunci alla bacheca
+	 * @throws UtenteException
+	 * @throws AnnuncioException
+	 */
 	@BeforeEach
 	void testCostruttore() throws UtenteException, AnnuncioException {
 		u = new Utente("daniele@gmail.com", "Daniele");
@@ -32,6 +40,10 @@ class BachecaTest {
 		b = new Bacheca();
 	}
 	
+	/**
+	 * viene testata l'aggiunta di un annuncio alla bacheca
+	 * @throws BachecaException
+	 */
 	@Test
 	void testAggiungiAnnuncio() throws BachecaException {
 		assertTrue(b.aggiungiAnnuncio(a1));
@@ -40,6 +52,10 @@ class BachecaTest {
 		assertTrue(b.aggiungiAnnuncio(a2));
 	}
 	
+	/**
+	 * viene testato che gli annunci vengono eliminati correttamente
+	 * @throws BachecaException
+	 */
 	@Test
 	void testEliminaAnnuncio() throws BachecaException{
 		b.aggiungiAnnuncio(a1);
@@ -47,6 +63,10 @@ class BachecaTest {
 		assertTrue(b.rimuoviAnnuncio(u.getEmail(), 0));
 	}
 	
+	/**
+	 * viene testato che in caso di iterazione sulla bacheca, alla chiamata del comando Annuncio.remove venga sollevata un'eccezione
+	 * @throws AnnuncioException
+	 */
 	@Test
 	void testEliminaForEach() throws AnnuncioException {
 		b.aggiungiAnnuncio(a1);
@@ -57,6 +77,11 @@ class BachecaTest {
 		}
 	}
 	
+	/**
+	 * viene testata la ricerca tramite una stringa
+	 * 
+	 * @throws BachecaException
+	 */
 	@Test
 	void testRicerca() throws BachecaException{
 		b.aggiungiAnnuncio(a1);
@@ -64,6 +89,13 @@ class BachecaTest {
 		assertEquals("[Annuncio [codice=0, utente=[email=daniele@gmail.com, nome=Daniele], tipologia=Acquisto, articolo=Libro, prezzo=30.5, parolaChiave=Nero, scadenza=null], Annuncio [codice=1, utente=[email=daniele@gmail.com, nome=Daniele], tipologia=Vendita, articolo=Telefono, prezzo=100.0, parolaChiave=Nuovo, Nero, scadenza=2025-02-05]]", b.listaAnnunciParolaChiave("Nero, Nuovo").toString());
 	}
 	
+	/**
+	 * viene testato che pulisciBacheca elimini gli annunci scaduti (in questo caso il risultato è sempre false, perché creando l'annuncio viene sollevata 
+	 * un'eccezione in caso di data già scaduta), per un test accurato bisognerebbe tenere aperto il programma dopo le 00:00
+	 * e chiamare la funzione
+	 * 
+	 * @throws BachecaException
+	 */
 	@Test
 	void testPulisciBacheca() throws BachecaException {
 		b.aggiungiAnnuncio(a1);

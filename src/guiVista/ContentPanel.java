@@ -23,6 +23,24 @@ import exceptions.BachecaException;
 import gui.BachecaGui;
 import gui.contollo.ControlloBacheca;
 
+/**
+ * Questa classe si occupa della creazione della bacheca all'interno della nostra GUI
+ * 
+ * @param model 	oggetto di tipo bacheca per impostare la bacheca grafica
+ * @param annuncio 	oggetto JPanel per creare vari annunci prensenti nella bacheca
+ * @param nom 		oggetto di tipo JLabel che contiene una stringa che viene mandata a schermo nell' panel annuncio
+ * @param nomArt 	oggetto di tipo JTextField che contiene il nome dell' articolo dell' annuncio
+ * @param prez 		oggetto di tipo JLabel che contiene una stringa che viene mandata a schermo nell' panel annuncio
+ * @param prezArt	oggetto di tipo JTextField che contiene il prezzo dell' articolo dell' annuncio
+ * @param acquista	oggetto di tipo JButton che simula l' acquisto del prodotto venduto
+ * @param rimuovi 	oggetto di tipo JButton che rimuove l' articolo, compare solo se si è proprietari dell' annunio
+ * @param data		oggetto di tipo JLabel che contiene una stringa che viene mandata a schermo nell' panel annuncio
+ * @param dataArt	oggetto di tipo JTextField che contiene la data di scadenza dell' annuncio
+ * @param pChiave 	oggetto di tipo JLabel che contiene una stringa che viene mandata a schermo nell' panel annuncio
+ * @param pChiave 	oggetto di tipo JTextArea nel quale viene inserita una stringa che conterrà le parole chiave per la ricerca
+ * @param x 		variabile di tipo intero che va a definire la posizione sull asse orizzontale dell' annuncio creato
+ * @param y 		variabile di tipo intero che va a definire la posizione sull asse verticale dell' annuncio creato
+ */
 public class ContentPanel extends JPanel{
 	
 	//private static final ActionListener null = null;
@@ -41,6 +59,12 @@ public class ContentPanel extends JPanel{
 	ControlloBacheca controllo;
 	static int x = 0;
 	static int y = 0;
+	
+	/**
+	 * Costruttore della classe ContentPanel che imposta il Layout dell Panel e inserisce la view
+	 * @param model		oggetto di tipo Bacheca che fornisce i dati per visualizzare gli annunci
+	 * @throws BachecaException
+	 */
 	public ContentPanel(Bacheca model) throws BachecaException {
 		this.model = model;
 		setLayout(new GridBagLayout());
@@ -49,6 +73,15 @@ public class ContentPanel extends JPanel{
 		
 	}
 	
+
+	/**
+	 * Metodo void che va a creare e aggiornare la vista della nosta bacheca.
+	 * Grazie all' iteratore andremo a visitare tutto l' ArrayList e comporremo il nostro ContentPanel,
+	 * impostando anche la posizione di ogni elemento Jpanel che viene creato.
+	 * è stato inserito anche un ActionLlistener che su un pulsante rimuovi per fare la remove di un elemento
+	 * @param list 	Parametro passato al metodo sulla quale basare la creazione del content Panel
+	 * @throws BachecaException
+	 */
 	public void upDateView(ArrayList<Annuncio> list) throws BachecaException {
 		removeAll();
 		if(list != null) {
@@ -165,6 +198,13 @@ public class ContentPanel extends JPanel{
 }
 			
 	
+/**
+ * Metodo per inizializzare il panel dell' annuncio, impostando il Layout e inserendo tutti gli elementi 
+ * per dare informazioni sull' annuncio.
+ * Impostando anche se l' annuncio è di vendita o di acquisto
+ * @param a
+ * @throws BachecaException
+ */
 	public void creaInserz(Annuncio a) throws BachecaException {
 		annuncio = new JPanel();
 		annuncio.setLayout(new GridBagLayout());

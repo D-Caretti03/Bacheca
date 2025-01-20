@@ -12,12 +12,20 @@ import exceptions.AnnuncioException;
 import exceptions.UtenteException;
 import io.LetturaScritturaBacheca;
 
+/**
+ * Classe test che testa la lettura e scrittura da file
+ */
 class LetturaScritturaBachecaTest {
 
 	Utente u;
 	Annuncio a1, a2;
 	Bacheca b;
 	
+	/**
+	 * prima di ogni test viene creata una bacheca e vengono aggiunti degli annunci
+	 * @throws UtenteException
+	 * @throws AnnuncioException
+	 */
 	@BeforeEach
 	void testInizializzazione() throws UtenteException, AnnuncioException {
 		int codice = 1;
@@ -30,6 +38,14 @@ class LetturaScritturaBachecaTest {
 		b.aggiungiAnnuncio(a2);
 	}
 	
+	/**
+	 * viene testato che una bacheca letta da file sia uguale a un'altra bacheca inizializzata da programma con gli stessi campi
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws UtenteException
+	 * @throws AnnuncioException
+	 */
 	@Test
 	void testLetturaBacheca() throws ClassNotFoundException, IOException, UtenteException, AnnuncioException {
 		String file = "bacheca.txt";
@@ -37,6 +53,10 @@ class LetturaScritturaBachecaTest {
 		assertEquals(b.toString(), b_file.toString());
 	}
 	
+	/**
+	 * viene testato che la scrittura su file abbia esito positivo
+	 * @throws IOException
+	 */
 	@Test
 	void testScritturaBacheca() throws IOException {
 		String file = "bacheca_out.txt";

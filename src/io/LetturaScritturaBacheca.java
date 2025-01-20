@@ -7,12 +7,24 @@ import bachecaAnnunci.*;
 import exceptions.AnnuncioException;
 import exceptions.UtenteException;
 
+/**
+ * classe che legge e scrive su file 
+ */
 public class LetturaScritturaBacheca {
 
 	public static final String percorso = new File("").getAbsoluteFile() + "/src/fileTesto/";
 	private static final String separatore = ";";
 	
-	
+	/**
+	 * vengono lette le righe da un file di testo e inserite come parametri di Utente e Annuncio, poi aggiunto a Bacheca
+	 * 
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws UtenteException
+	 * @throws AnnuncioException
+	 */
 	public static Bacheca letturaBacheca(String file) throws IOException, ClassNotFoundException, UtenteException, AnnuncioException{
 		Bacheca b = new Bacheca();
 		file = percorso + file;
@@ -43,10 +55,19 @@ public class LetturaScritturaBacheca {
 			}
 			codice++;
 		}
+		in.close();
 		return b;
 		
 	}
 	
+	/**
+	 * vengono scritti su file gli annunci iterati in bacheca
+	 * 
+	 * @param b
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
 	public static boolean scritturaBacheca(Bacheca b, String file) throws IOException {
 		file = percorso + file;
 		

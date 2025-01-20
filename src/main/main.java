@@ -10,7 +10,9 @@ import exceptions.AnnuncioException;
 import exceptions.BachecaException;
 import exceptions.UtenteException;
 import gui.BachecaGui;
-
+/**Classe main dove viene inizializzata una bacheca di esempio e passata alle funzioni grafiche
+ * 
+ */
 public class main {
 	public static Bacheca bacheca;
 	private static int cod = 1;
@@ -34,11 +36,20 @@ public class main {
 		interfacciaGrafica();
 		interfacciaRigaComando();
 	}
-	
+	/**Viene chiamata la funzione per visualizzare ed eseguire operazioni su un'interfaccia da riga di comando
+	 * 
+	 * @throws AnnuncioException
+	 * @throws UtenteException
+	 * @throws BachecaException
+	 */
 	private static void interfacciaRigaComando() throws AnnuncioException, UtenteException, BachecaException {
 		new InterfacciaRigaComando(bacheca, cod).start();
 	}
 	
+	/**
+	 * Viene chiamata la funzione per visualizzare ed eseguire operazioni su una GUI
+	 * @throws BachecaException
+	 */
 	private static void interfacciaGrafica() throws BachecaException {
 		new BachecaGui(bacheca);
 	}

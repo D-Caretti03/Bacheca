@@ -17,6 +17,16 @@ import exceptions.UtenteException;
 import guiVista.ContentPanel;
 import guiVista.DialogoContatto;
 
+/** Questa classe si occupa del controllo degli eventi, chiamando in modo opportuno una determinata parte di codice
+* in base al pulsante che viene premuto
+* 
+* <p>
+* 
+* @param model	oggetto di tipo Bacheca che il costruttore imposterà in base a ciò che riceve
+* @param view	oggetto di tipo ContentPanel che serve per lo più ad aggiornare il ContentPanel
+* @param input oggetto di tipo ArrayList che sarà usato per salvare il dato di ritorno da un metodo esterno
+* @param u 	oggetto di tipo Utente che contiene i dati di chi ha fatto il login
+*/
 public class ControlloBacheca implements ActionListener{
 	
 	private Bacheca model;
@@ -24,11 +34,20 @@ public class ControlloBacheca implements ActionListener{
 	private ArrayList<Annuncio> input;
 	public Utente u;
 	  
+	/**Costruttore della nostra classe 
+	 * @param view	oggetto di tipo ContentPanel che contiene il nostro contentPanel
+	 * @param model	oggetto di tipo Bacheca che contiene la nostra Bacheca
+	 */
 	public ControlloBacheca(ContentPanel view, Bacheca model) {
 		this.model = model;
 		this.view = view;
 	}
 
+	/**
+	 * Metodo void override che in base all' ActionEvent ottenuto eseguira una certa azione
+	 * In particolare l' oggetto fornito in ingresso ActionEvent dal quale viene estratto il testo del pulsante
+	 * premuto, capendo così che azione eseguire
+	 */
 	@Override 
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();

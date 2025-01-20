@@ -1,5 +1,8 @@
 package utilities;
 
+/**
+ * Costanti utilizzate per i messaggi delle eccezioni
+ */
 public class Costanti {
 	public static final String ECC_EMAIL_NULL = "L'email non può essere null";
 	public static final String ECC_NOME_NULL = "Il nome utente non può essere null";
