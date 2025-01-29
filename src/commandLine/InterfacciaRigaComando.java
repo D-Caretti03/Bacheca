@@ -138,7 +138,7 @@ public class InterfacciaRigaComando {
 	 * Metodo void per stampare tutti gli annunci della bacheca
 	 */
 	private void stampaBacheca() {
-		b.toString();
+		System.out.println(b.toString());
 	}
 	
 	/**

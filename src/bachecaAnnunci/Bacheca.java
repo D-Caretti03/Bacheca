@@ -136,10 +136,7 @@ public class Bacheca implements Iterable<Annuncio>{
 	 */
 	@Override
 	public String toString() {
-		System.out.println("Bacheca : \n");
-		for(Annuncio a: bacheca)
-			System.out.println(a.toString()+ "\n");
-		return "";
+		return "Bacheca:\n" +  bacheca.stream().map(Object::toString).collect(java.util.stream.Collectors.joining("\n"));
 	}
 	
 	/**

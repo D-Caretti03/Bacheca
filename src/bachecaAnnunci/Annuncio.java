@@ -53,10 +53,11 @@ public class Annuncio{
 		if(articolo.isBlank()) throw new AnnuncioException(Costanti.ECC_ART_VUOTO);
 		if(prezzo < 0) throw new AnnuncioException(Costanti.ECC_PREZZO_NEG);
 		if(parolaChiave == null) throw new AnnuncioException(Costanti.ECC_PAROLA_CHIAVE_NULL);
-		LocalDate oggi = LocalDate.now();
-		if(scadenza == null)throw new AnnuncioException(Costanti.ECC_DATA_NULL);
-		if(scadenza.isBefore(oggi)) throw new AnnuncioException(Costanti.ECC_DATA_PASSATA);
-		if(tipologia == 'a' && scadenza != null) throw new AnnuncioException(Costanti.ECC_DATA_ACQ);
+		if(tipologia == 'v') {
+			LocalDate oggi = LocalDate.now();
+			if(scadenza == null)throw new AnnuncioException(Costanti.ECC_DATA_NULL);
+			if(scadenza.isBefore(oggi)) throw new AnnuncioException(Costanti.ECC_DATA_PASSATA);
+		}
 		this.tipologia = tipologia;
 		this.articolo = articolo;
 		this.prezzo = prezzo;
@@ -77,19 +78,7 @@ public class Annuncio{
 	 * @throws AnnuncioException Eccezione che si verifica in determinate condizioni
 	 */
 	public Annuncio(Utente utente, char tipologia, String articolo, double prezzo, String parolaChiave, int codice) throws AnnuncioException{
-		super();
-		this.utente = utente;
-		if(tipologia == 'v') throw new AnnuncioException(Costanti.ECC_NODATA_VEND);
-		if(tipologia != 'a' && tipologia != 'v') throw new AnnuncioException(Costanti.ECC_TIPO_ERR);
-		if(articolo == null) throw new AnnuncioException(Costanti.ECC_ART_NULL);
-		if(articolo.isBlank()) throw new AnnuncioException(Costanti.ECC_ART_VUOTO);
-		if(prezzo < 0) throw new AnnuncioException(Costanti.ECC_PREZZO_NEG);
-		if(parolaChiave == null) throw new AnnuncioException(Costanti.ECC_PAROLA_CHIAVE_NULL);
-		this.tipologia = tipologia;
-		this.articolo = articolo;
-		this.prezzo = prezzo;
-		this.parolaChiave = parolaChiave;
-		this.codice = codice;
+		this(utente, tipologia, articolo, prezzo, parolaChiave, null, codice);
 	}
 
 	/**
